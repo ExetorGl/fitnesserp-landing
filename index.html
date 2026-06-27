@@ -2,13 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    <title>FitnessERP — Скачать приложения</title>
-    <!-- Подключаем шрифт Inter для современного вида -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitnessERP - Управление фитнес-клубом</title>
     <style>
+        /* Общие стили */
         * {
             margin: 0;
             padding: 0;
@@ -16,518 +13,288 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
-            background-image: radial-gradient(circle at 10% 30%, rgba(0, 102, 255, 0.03) 0%, transparent 50%),
-                              radial-gradient(circle at 90% 70%, rgba(0, 200, 200, 0.03) 0%, transparent 50%);
+            padding: 20px;
         }
 
-        /* главный контейнер — карточка-лендинг */
-        .landing {
-            max-width: 1100px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 48px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.02);
-            padding: 48px 40px 56px;
-            transition: all 0.2s ease;
-        }
-
-        @media (max-width: 640px) {
-            .landing {
-                padding: 32px 20px 40px;
-                border-radius: 32px;
-            }
-        }
-
-        /* хедер с логотипом и названием */
-        .header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .logo-badge {
-            background: #0f172a;
-            color: white;
-            font-weight: 700;
-            font-size: 18px;
-            letter-spacing: -0.3px;
-            padding: 6px 14px;
-            border-radius: 40px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo-badge span {
-            background: #3b82f6;
-            padding: 0 6px;
+        .container {
+            background: white;
             border-radius: 20px;
-            font-size: 14px;
-            color: white;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 50px;
+            transition: transform 0.3s ease;
         }
 
-        .header h1 {
-            font-size: 26px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            color: #0f172a;
-            margin-left: 4px;
+        .container:hover {
+            transform: translateY(-5px);
         }
 
-        @media (max-width: 480px) {
-            .header {
-                flex-wrap: wrap;
-            }
-            .header h1 {
-                font-size: 22px;
-            }
+        /* Хедер */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        /* главный заголовок */
-        .hero-title {
+        .logo {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
             font-size: 42px;
-            font-weight: 700;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
-            color: #0f172a;
-            margin-top: 12px;
-            margin-bottom: 12px;
-        }
-
-        .hero-title .highlight {
-            background: linear-gradient(135deg, #2563eb, #0d9488);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
-        .sub-description {
+        .subtitle {
+            color: #666;
             font-size: 18px;
-            color: #334155;
-            max-width: 700px;
-            line-height: 1.6;
-            margin-bottom: 40px;
-            font-weight: 400;
-        }
-
-        @media (max-width: 640px) {
-            .hero-title {
-                font-size: 30px;
-            }
-            .sub-description {
-                font-size: 16px;
-            }
-        }
-
-        /* блок «окно для скачивания» — по сути карточка-призыв */
-        .download-cta {
-            background: #f1f5f9;
-            border-radius: 24px;
-            padding: 24px 28px;
-            margin-bottom: 48px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            border: 1px solid #e2e8f0;
-            box-shadow: inset 0 1px 2px rgba(255,255,255,0.8);
-        }
-
-        .cta-text {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .cta-text .icon-big {
-            font-size: 34px;
-            line-height: 1;
-        }
-
-        .cta-text h3 {
-            font-weight: 600;
-            font-size: 20px;
-            color: #0f172a;
-            letter-spacing: -0.3px;
-        }
-
-        .cta-text p {
-            color: #475569;
-            font-size: 15px;
-            margin-top: 2px;
-        }
-
-        .cta-badge {
-            background: #0f172a;
-            color: white;
-            font-weight: 500;
-            padding: 8px 20px;
-            border-radius: 100px;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-        }
-
-        @media (max-width: 640px) {
-            .download-cta {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
-            .cta-badge {
-                align-self: flex-start;
-            }
-        }
-
-        /* карточки приложений */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 8px;
-        }
-
-        @media (max-width: 780px) {
-            .cards-grid {
-                grid-template-columns: 1fr;
-                gap: 28px;
-            }
-        }
-
-        .app-card {
-            background: #ffffff;
-            border-radius: 32px;
-            padding: 28px 28px 32px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0,0,0,0.02);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #eef2f6;
-        }
-
-        .app-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0,0,0,0.02);
-            border-color: #d0d9e8;
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 14px;
-        }
-
-        .card-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            flex-shrink: 0;
-            background: #f1f5f9;
-        }
-
-        .card-icon.desktop {
-            background: #e0e7ff;
-            color: #1e3a8a;
-        }
-
-        .card-icon.mobile {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .card-header h2 {
-            font-size: 24px;
-            font-weight: 600;
-            letter-spacing: -0.4px;
-            color: #0f172a;
-        }
-
-        .card-platform {
-            font-size: 14px;
-            background: #f1f5f9;
-            padding: 4px 12px;
-            border-radius: 40px;
-            color: #334155;
-            font-weight: 500;
-            display: inline-block;
-            margin-top: 2px;
-        }
-
-        .card-description {
-            color: #334155;
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 8px 0 18px;
-            flex: 1;
-        }
-
-        .card-description ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px 14px;
-        }
-
-        .card-description ul li {
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #1e293b;
-        }
-
-        .card-description ul li::before {
-            content: "▹";
-            color: #2563eb;
-            font-weight: 600;
-        }
-
-        .download-btn {
-            background: #0f172a;
-            color: white;
-            border: none;
-            padding: 14px 18px;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 16px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
             margin-top: 10px;
-            text-decoration: none;
-            width: 100%;
-            font-family: inherit;
-            letter-spacing: -0.2px;
-            border: 1px solid #1e293b;
         }
 
-        .download-btn:hover {
-            background: #1e293b;
+        /* Основные преимущества */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
         }
 
-        .download-btn:active {
-            transform: scale(0.97);
-        }
-
-        .download-btn .badge-os {
-            background: rgba(255,255,255,0.12);
-            padding: 2px 12px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: #0f172a;
-            border: 1px solid #cbd5e1;
-        }
-
-        .btn-outline:hover {
-            background: #f1f5f9;
-            border-color: #94a3b8;
-        }
-
-        .btn-outline .badge-os {
-            background: #e9edf3;
-            color: #1e293b;
-        }
-
-        /* фиксим отображение кнопок */
-        .card-actions {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .card-actions .download-btn {
-            margin-top: 0;
-        }
-
-        .app-card.desktop-card .card-icon {
-            background: #e0e7ff;
-        }
-
-        .app-card.mobile-card .card-icon {
-            background: #d1fae5;
-        }
-
-        /* маленькая подпись внизу */
-        .footer-note {
-            margin-top: 48px;
+        .feature-item {
             text-align: center;
-            color: #64748b;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: #eef0ff;
+            transform: scale(1.05);
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .feature-item h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .feature-item p {
             font-size: 14px;
-            border-top: 1px solid #e9edf2;
-            padding-top: 28px;
-            letter-spacing: 0.2px;
+            color: #777;
+        }
+
+        /* Блок скачивания */
+        .download-section {
+            background: linear-gradient(135deg, #f8f9ff 0%, #eef0ff 100%);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0 20px;
+            border: 2px dashed #764ba2;
+        }
+
+        .download-section h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .download-section p {
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        .version-info {
+            display: inline-block;
+            background: #764ba2;
+            color: white;
+            padding: 4px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* Кнопки скачивания */
+        .download-buttons {
             display: flex;
+            gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 8px 20px;
         }
 
-        .footer-note span {
-            opacity: 0.7;
-        }
-
-        .footer-note a {
-            color: #1e293b;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
             text-decoration: none;
-            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
-        .footer-note a:hover {
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(118, 75, 162, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(118, 75, 162, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #764ba2;
+            border: 2px solid #764ba2;
+        }
+
+        .btn-secondary:hover {
+            background: #764ba2;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-icon {
+            font-size: 24px;
+        }
+
+        /* Дополнительная информация */
+        .info-text {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+
+        .info-text a {
+            color: #764ba2;
+            text-decoration: none;
+        }
+
+        .info-text a:hover {
             text-decoration: underline;
         }
 
-        /* адаптив для мелких экранов */
-        @media (max-width: 400px) {
-            .hero-title {
-                font-size: 26px;
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
             }
-            .card-header h2 {
-                font-size: 20px;
+
+            h1 {
+                font-size: 30px;
             }
-            .cta-text .icon-big {
-                font-size: 26px;
+
+            .download-section {
+                padding: 25px 15px;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-    <div class="landing">
-        <!-- шапка -->
+
+    <div class="container">
+        <!-- Хедер -->
         <div class="header">
-            <div class="logo-badge">
-                🏋️ FitnessERP <span>v2</span>
-            </div>
-            <h1>Управление фитнес-клубом</h1>
+            <div class="logo">🏋️</div>
+            <h1>FitnessERP</h1>
+            <p class="subtitle">Умная система управления фитнес-клубом</p>
         </div>
 
-        <!-- главный заголовок -->
-        <h1 class="hero-title">
-            Скачайте <span class="highlight">FitnessERP</span> <br> для вашего бизнеса
-        </h1>
-        <p class="sub-description">
-            Десктопная версия для администраторов и мобильное приложение для тренеров — 
-            учёт клиентов, абонементов, аналитика и контроль посещаемости в одном комплексе.
-        </p>
-
-        <!-- «окно для скачивания» — призыв к действию -->
-        <div class="download-cta">
-            <div class="cta-text">
-                <span class="icon-big">📥</span>
-                <div>
-                    <h3>Готовы начать?</h3>
-                    <p>Выберите версию под ваши задачи &nbsp;•&nbsp; Все данные синхронизируются</p>
-                </div>
+        <!-- Преимущества -->
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-icon">📊</div>
+                <h3>Аналитика</h3>
+                <p>Отчеты и статистика в реальном времени</p>
             </div>
-            <div class="cta-badge">
-                ⚡ Бесплатно для малых клубов
+            <div class="feature-item">
+                <div class="feature-icon">👥</div>
+                <h3>Управление клиентами</h3>
+                <p>База клиентов и абонементов</p>
             </div>
-        </div>
-
-        <!-- карточки приложений -->
-        <div class="cards-grid">
-            <!-- Десктопное приложение -->
-            <div class="app-card desktop-card">
-                <div class="card-header">
-                    <div class="card-icon desktop">🖥️</div>
-                    <div>
-                        <h2>FitnessERP</h2>
-                        <span class="card-platform">Desktop • Windows / macOS / Linux</span>
-                    </div>
-                </div>
-                <div class="card-description">
-                    <p><strong>Полнофункциональный учёт для администратора.</strong> Всё в одном окне:</p>
-                    <ul>
-                        <li>Клиенты &amp; абонементы</li>
-                        <li>Фильтрация и поиск</li>
-                        <li>Отчёты по выручке</li>
-                        <li>Экспорт в .xlsx / .txt</li>
-                        <li>Работа с PostgreSQL</li>
-                    </ul>
-                </div>
-                <div class="card-actions">
-                    <a href="#" class="download-btn" onclick="alert('Скачивание десктопного приложения FitnessERP (версия для Windows)')">
-                        ⬇️ Скачать для Windows
-                        <span class="badge-os">.exe</span>
-                    </a>
-                    <a href="#" class="download-btn btn-outline" onclick="alert('Скачивание версии для macOS / Linux ( portable )')">
-                        Другие платформы
-                        <span class="badge-os">macOS / Linux</span>
-                    </a>
-                </div>
+            <div class="feature-item">
+                <div class="feature-icon">💰</div>
+                <h3>Финансы</h3>
+                <p>Учет доходов и расходов клуба</p>
             </div>
-
-            <!-- Мобильное приложение -->
-            <div class="app-card mobile-card">
-                <div class="card-header">
-                    <div class="card-icon mobile">📱</div>
-                    <div>
-                        <h2>FitnessERP Mobile</h2>
-                        <span class="card-platform">Android • Kotlin + Jetpack Compose</span>
-                    </div>
-                </div>
-                <div class="card-description">
-                    <p><strong>Лёгкий инструмент для тренеров и менеджеров.</strong> Работает офлайн:</p>
-                    <ul>
-                        <li>Просмотр клиентов</li>
-                        <li>QR-сканер / быстрая отметка</li>
-                        <li>Активные абонементы</li>
-                        <li>Полнотекстовый поиск</li>
-                        <li>Локальная БД Room</li>
-                    </ul>
-                </div>
-                <div class="card-actions">
-                    <a href="#" class="download-btn" onclick="alert('Скачивание мобильного приложения FitnessERP (APK)')">
-                        ⬇️ Скачать APK
-                        <span class="badge-os">Android</span>
-                    </a>
-                    <a href="#" class="download-btn btn-outline" onclick="alert('Открыть страницу в Google Play (скоро)')">
-                        📲 Google Play
-                        <span class="badge-os">скоро</span>
-                    </a>
-                </div>
+            <div class="feature-item">
+                <div class="feature-icon">📅</div>
+                <h3>Расписание</h3>
+                <p>Тренировки и залы</p>
             </div>
         </div>
 
-        <!-- дополнительный блок: версии и описание -->
-        <div class="footer-note">
-            <span>🔹 Версия 2.0.1</span>
-            <span>•</span>
-            <span>Десктоп: <strong>Python + Tkinter</strong></span>
-            <span>•</span>
-            <span>Мобильное: <strong>Kotlin + Room</strong></span>
-            <span>•</span>
-            <a href="#" onclick="alert('Открыть документацию по API и интеграции')">📖 Документация</a>
-            <span>•</span>
-            <a href="#" onclick="alert('Поддержка и контакты')">✉️ Поддержка</a>
+        <!-- Секция скачивания -->
+        <div class="download-section">
+            <span class="version-info">Версия 1.0.0</span>
+            <h2>Скачать FitnessERP</h2>
+            <p>Загрузите установщик программы для Windows</p>
+
+            <div class="download-buttons">
+                <!-- Кнопка скачивания с GitHub Releases -->
+                <a href="https://github.com/ExetorGl/fitnesserp-landing/releases/download/v1.0.0/FitnessERP_Setup.zip" 
+                   class="btn btn-primary" 
+                   download>
+                    <span class="btn-icon">⬇️</span>
+                    Скачать .exe (ZIP)
+                </a>
+
+                <!-- Кнопка перехода на страницу релизов -->
+                <a href="https://github.com/ExetorGl/fitnesserp-landing/releases" 
+                   class="btn btn-secondary" 
+                   target="_blank">
+                    <span class="btn-icon">🔗</span>
+                    Все версии
+                </a>
+            </div>
+        </div>
+
+        <!-- Дополнительная информация -->
+        <div class="info-text">
+            <p>
+                📦 Размер: ~25 МБ · 
+                🔒 Требуется Windows 10/11 · 
+                💡 <a href="https://github.com/ExetorGl/fitnesserp-landing" target="_blank">Исходный код на GitHub</a>
+            </p>
+            <p style="margin-top: 10px; font-size: 12px;">
+                ⚡ Автоматическая установка · Бесплатно для некоммерческого использования
+            </p>
         </div>
     </div>
+
 </body>
 </html>
